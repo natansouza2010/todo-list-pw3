@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @SpringBootApplication
 public class TrabalhopraticoTodoApplication implements CommandLineRunner {
@@ -24,8 +25,8 @@ public class TrabalhopraticoTodoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		Task task = new Task();
-		task.setInicio(LocalDate.now());
-		task.setFim(LocalDate.now());
+		task.setInicio(LocalDate.of(2021,05,12));
+		task.setFim(LocalDate.of(2021,06,13));
 		task.setDescricao("Olá marilene");
 		task.setStatus(Status.FAZENDO);
 		taskService.save(task);
