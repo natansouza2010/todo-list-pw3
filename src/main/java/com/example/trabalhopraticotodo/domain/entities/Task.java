@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Generated;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
@@ -23,7 +24,9 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String descricao;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate inicio;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fim;
     private Status status;
 }

@@ -16,28 +16,37 @@
     <div class="container">
         <div class="row">
             <h1 class="content-title">Tasks</h1>
-            <form action="/task/save" method="POST">
+            <form action="/task/save" method="POST"  th:object="${task}">
                 <div class="form-group">
                     <input type="text" class="form-control" required="required"
                            placeholder="Descricao"
+                           th:field="*{descricao}"
+                           th:value="${task?.descricao}"
 
                     />
                 </div>
 
                 <div class="form-group">
                     <label for="dataInicio">Data Inicio</label>
-                    <input id="dataInicio" type="date"  class="form-control" required="required"
+                    <input id="dataInicio" type="date"  class="form-control" th:value="${task?.inicio}" required="required"
+                           th:field="*{inicio}"
                     />
                 </div>
                 <div class="form-group">
                     <label for="dataFim">Data Fim</label>
                     <input id="dataFim" type="date" class="form-control" required="required"
+                           th:value="${task?.fim}"
+                           th:field="*{fim}"
                     />
                 </div>
                 <br/>
                 <div class="form-group">
-                    <select class="form-select">
-                        <option>A Fazer</option>
+                    <select id="status" class="form-control" th:field="*{status}">
+                        <option th:each="stts : ${T(com.example.trabalhopraticotodo.domain.utils.Status).values()}"
+                                th:value="${stts}"
+                                th:text="${stts.displayName}"
+                                th:selected="${stts} == ${task?.status}"
+                        ></option>
                     </select>
 
                 </div>
@@ -63,53 +72,17 @@
                     </tr>
                     </thead>
                     <tbody>
-<!--                    <tr th:if="${#lists.isEmpty(allTask)}" class="btn-default">-->
-<!--                        <td colspan="5" align="center">Não Existe Tarefas!!!</td>-->
-<!--                    </tr>-->
+
                     <tr th:each="task : ${taskList}">
                         <td th:text="${task.descricao}"></td>
                         <td th:text="${task.inicio}"></td>
                         <td th:text="${task.fim}"></td>
                         <td th:text="${task.status}"></td>
-                        <td>Ações</td>
-<!--                        <td align="center">-->
-<!--                            <a th:href="@{/task/edit/{id}(id=${task.id})}">-->
-<!--                                            <span class="glyphicon glyphicon-edit" data-toggle="tooltip"-->
-<!--                                                  data-placement="top" title="Edit Task"></span></a>-->
-<!--                            &nbsp; &nbsp;-->
-<!--                            <a data-toggle="modal" data-target="#modal-toTrash"-->
-<!--                               th:attr="data-target='#modal-toTrash'+${task.id}">-->
-<!--                                            <span class="glyphicon glyphicon-trash" data-toggle="tooltip"-->
-<!--                                                  data-placement="top" title="Sent to Trash Box"></span></a>-->
-<!--                        </td>-->
-<!--                        start send to trash modal-->
-<!--                        <div class="modal modal-toTrash" th:id="modal-toTrash+${task.id}">-->
-<!--                            <div class="modal-dialog">-->
-<!--                                <div class="modal-content">-->
-<!--                                    <div class="modal-header">-->
-<!--                                        <button type="button" class="close" data-dismiss="modal"-->
-<!--                                                aria-hidden="true">×-->
-<!--                                        </button>-->
-<!--                                        <h3 id="myModalLabel">Delete Confirmation</h3>-->
-<!--                                    </div>-->
-<!--                                    <div class="modal-body">-->
-<!--                                        <p class="error-text"><strong>Are you sure you want to-->
-<!--                                            delete this task ?</strong></p>-->
-<!--                                    </div>-->
-<!--                                    <div class="modal-footer">-->
-<!--                                        <button class="btn " data-dismiss="modal" aria-hidden="true">-->
-<!--                                            Cancel-->
-<!--                                        </button>-->
-<!--                                        <a th:href="@{/task/trash/{id}(id=${task.id})}">-->
-<!--                                            <span class="btn btn-danger" value="delete">Delete</span></a>-->
+                        <td>
+                            <a th:href="@{/edit/{id}(id=${task.id})}"><i class="fas fa-edit"></i></a>
+                            <a th:href="@{/delete/{id}(id=${task.id})}"><i class="fas fa-eraser"></i></i></a>
+                        </td>
 
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                &lt;!&ndash; /.modal-content &ndash;&gt;-->
-<!--                            </div>-->
-<!--                            &lt;!&ndash; /.modal-dialog &ndash;&gt;-->
-<!--                        </div>-->
-                        <!--end send to trash modal-->
                     </tr>
 
                     </tbody>

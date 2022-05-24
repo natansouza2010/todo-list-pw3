@@ -27,8 +27,11 @@ public class TaskService {
         return true;
     }
 
-    public boolean delete(Task task){
-        taskRepository.delete(task);
+
+
+    public boolean delete(Long id){
+        Optional<Task> task = taskRepository.findById(id);
+        taskRepository.delete(task.get());
         return true;
     }
 
@@ -36,6 +39,8 @@ public class TaskService {
         Optional<Task> task = taskRepository.findById(id);
         return task.get();
    }
+
+
 
 
 }

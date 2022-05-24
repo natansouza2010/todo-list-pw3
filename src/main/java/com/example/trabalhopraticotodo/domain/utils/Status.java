@@ -1,13 +1,21 @@
 package com.example.trabalhopraticotodo.domain.utils;
 
 public enum Status {
-    A_FAZER("a_fazer"),
-    FAZENDO("fazendo"),
-    FEITO("feito");
+    A_FAZER("A fazer"),
+    FAZENDO("Fazendo"),
+    FEITO("Feito");
 
-    private String status;
 
-    Status (String status){
-        this.status = status;
+    private final String displayName;
+
+    Status(String displayName) {
+        this.displayName = displayName;
     }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+
+
 }

@@ -24,12 +24,12 @@ public class TrabalhopraticoTodoApplication implements CommandLineRunner {
 	private TaskService taskService;
 	@Override
 	public void run(String... args) throws Exception {
-		Task task = new Task();
-		task.setInicio(LocalDate.of(2021,05,12));
-		task.setFim(LocalDate.of(2021,06,13));
-		task.setDescricao("Olá marilene");
-		task.setStatus(Status.FAZENDO);
-		taskService.save(task);
+//		Task task = new Task();
+//		task.setInicio(LocalDate.of(2021,05,12));
+//		task.setFim(LocalDate.of(2021,06,13));
+//		task.setDescricao("Olá marilene");
+//		task.setStatus(Status.FAZENDO);
+//		taskService.save(task);
 
 	}
 }
